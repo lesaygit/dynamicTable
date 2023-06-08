@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border: 1px solid;
+        }
+
+        table thead {
+            color: rgb(76, 18, 235);
+            background-color: aquamarine;
+        }
+
+        table tbody {
+            background-color: lightskyblue;
+        }
+
+        td {
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Mostrando array estático desde JS.</h2>
+    <input type="button" value="Tabla Dinamica" id="btn">
+    <hr>
+    <div id="html_dinamic"></div>
+
+    <!--section sscripts-->
+    <script>
+        (function () {
+            //variables
+            const my_array =
+                [
+                    {
+                        "userId": 1,
+                        "id": 1,
+                        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+                    },
+                    {
+                        "userId": 1,
+                        "id": 2,
+                        "title": "qui est esse",
+                        "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+                    },
+                    {
+                        "userId": 1,
+                        "id": 3,
+                        "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+                        "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+                    }
+                ];
+            const btn = document.getElementById('btn');
+
+            //funcion
+            const mostrar_array = function () {
+                const my_div = document.getElementById('html_dinamic');
+
+                //create table
+                const my_table = document.createElement('table');
+                const my_thead = document.createElement('thead');
+                const my_body = document.createElement('tbody');
+
+
+                //obteniendo las llaves del objeto
+                var captions_head = Object.keys(my_array[0]);
+
+                //cargando el thead de la tabla
+                const trhead = document.createElement('tr');
+                for (let index = 0; index < captions_head.length; index++) {
+                    const element = captions_head[index];
+                    const tdhead = document.createElement('td');
+                    tdhead.appendChild(document.createTextNode(element));
+                    trhead.appendChild(tdhead);
+                }
+
+                my_thead.appendChild(trhead);
+
+                //cargando tbody de la tabla
+                for (let index = 0; index < my_array.length; index++) {
+                    const element = my_array[index];
+                    const trbody = document.createElement('tr');
+                    const contador = captions_head.length;
+
+                    for (let j = 0; j < captions_head.length; j++) {
+                        const llaveNode = captions_head[j];
+                        const td_dinamic = document.createElement('td');
+                        const data_td = document.createTextNode(element[llaveNode]);
+                        td_dinamic.appendChild(data_td);
+                        trbody.appendChild(td_dinamic);
+                    }
+
+
+                    my_body.appendChild(trbody);
+                }
+
+                my_table.appendChild(my_thead);
+                my_table.appendChild(my_body);
+                my_table.style.fontFamily = 'verdana';
+                my_div.appendChild(my_table);
+
+            };
+
+            //events
+            btn.addEventListener('click', mostrar_array);
+
+        }());
+    </script>
+</body>
+
+</html>
